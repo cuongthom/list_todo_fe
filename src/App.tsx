@@ -23,7 +23,7 @@ function App() {
             form.resetFields()
         } catch (err) {
             console.log(err);
-            toast.error(err.response.data.message)
+            toast.error(`${values.todo} đã có`)
         } finally {
             setLoading(false);
         }
