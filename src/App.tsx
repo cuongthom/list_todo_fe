@@ -12,10 +12,6 @@ function App() {
     const [clientReady, setClientReady] = useState<boolean>(false);
     const [todos, setTodos] = useState<Todo[]>([]);
 
-    useEffect(() => {
-        setClientReady(true);
-        getAllTodo();
-    }, []);
 
     const onFinish = async (values: { todo: string }) => {
         try {
@@ -75,7 +71,10 @@ function App() {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+        setClientReady(true);
+        getAllTodo();
+    }, []);
     return (
         <div className="form-container">
             <TodoForm onFinish={onFinish} loading={loading} clientReady={clientReady}/>
