@@ -5,13 +5,14 @@ import toast from "react-hot-toast";
 import {Todo} from "./interface";
 import {TodoForm} from "./components/form/TodoForm.tsx";
 import {TodoList} from "./components/item/ListUl.tsx";
+import {Form} from "antd";
 
 
 function App() {
     const [loading, setLoading] = useState<boolean>(false);
     const [clientReady, setClientReady] = useState<boolean>(false);
     const [todos, setTodos] = useState<Todo[]>([]);
-
+    const [form] = Form.useForm();
 
     const onFinish = async (values: { todo: string }) => {
         try {
@@ -19,8 +20,10 @@ function App() {
             await todoService.addTodo({todo: values.todo, completed: false});
             toast.success("Đã thêm công việc");
             getAllTodo();
+            form.resetFields()
         } catch (err) {
-            console.error(err);
+            console.log(err);
+            toast.error(err.response.data.message)
         } finally {
             setLoading(false);
         }
@@ -77,7 +80,7 @@ function App() {
     }, []);
     return (
         <div className="form-container">
-            <TodoForm onFinish={onFinish} loading={loading} clientReady={clientReady}/>
+            <TodoForm form={form} onFinish={onFinish} loading={loading} clientReady={clientReady}/>
             <div style={{display: 'flex'}}>
                 <TodoList todos={todos} onComplete={completedTodo} onDelete={deleteTodo}/>
                 <TodoList todos={todos} onComplete={completedTodo} onDelete={deleteTodo} completed/>

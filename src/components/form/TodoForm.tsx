@@ -2,8 +2,8 @@ import {Button, Form, Input} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import {TodoFormProps} from "../../interface";
 
-export const TodoForm: React.FC<TodoFormProps> = ({onFinish, loading, clientReady}) => {
-    const [form] = Form.useForm();
+export const TodoForm: React.FC<TodoFormProps> = ({form, onFinish, loading, clientReady}) => {
+
 
     return (
         <Form form={form} name="horizontal_login" layout="inline" onFinish={onFinish}>

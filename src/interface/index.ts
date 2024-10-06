@@ -1,3 +1,5 @@
+import {FormInstance} from "antd";
+
 export interface Todo {
     _id: string;
     todo: string;
@@ -5,6 +7,7 @@ export interface Todo {
 }
 
 export interface TodoFormProps {
+    form: FormInstance
     onFinish: (values: { todo: string }) => Promise<void>;
     loading: boolean;
     clientReady: boolean;
